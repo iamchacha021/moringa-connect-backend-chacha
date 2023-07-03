@@ -81,6 +81,4 @@ test:
 #
 production:
   <<: *default
-  database: moringa_connect_backend_chacha_production
-  username: moringa_connect_backend_chacha
-  password: <%= ENV["MORINGA_CONNECT_BACKEND_CHACHA_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
