@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  get 'sessions/create'
-  get 'sessions/destroy'
   resources :donations
   resources :projects
   resources :events
   resources :users
+  get '/me', to: 'users#show'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
