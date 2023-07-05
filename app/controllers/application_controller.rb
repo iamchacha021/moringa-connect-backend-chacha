@@ -1,5 +1,8 @@
 class ApplicationController < ActionController::API
     # before_action :authorized
+
+    include ActionController::Cookies
+
     def encode_token(payload) #used to encode token
       # should store secret in env variable
       JWT.encode(payload, "my_s3cr3t")
