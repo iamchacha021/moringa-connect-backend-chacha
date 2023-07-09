@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    if current_user
+      render json: current_user, status: :ok
+    else
+      render json: {message: "Not authenticated"}, status: :unauthorized
+    end
   end
 
   # POST /users

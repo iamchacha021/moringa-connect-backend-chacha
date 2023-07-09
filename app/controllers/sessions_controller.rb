@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       token = encode_token({ user_id: user.id })
       cookies[:jwt_token] = { value: token, httponly: true } # Store the token in a cookie
-      render json: { loggedin: true, user: user }, status: :accepted
+      render json: { user: user }, status: :accepted
     else
       render json: { error: 'Invalid email or password' }, status: :unauthorized
     end
