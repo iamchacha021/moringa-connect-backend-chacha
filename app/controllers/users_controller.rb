@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     if user.valid?
       render json: user, status: :ok
     else
-      render json: user.errors, status: :unprocessable_entity
+      render json: user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -49,6 +49,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:first_name, :last_name, :cohort, :email, :is_admin, :is_alumni, :password)
+      params.permit(:first_name, :last_name, :cohort, :email, :password, :is_admin, :is_alumni)
     end
 end
