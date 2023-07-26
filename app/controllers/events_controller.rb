@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   def index
     @events = Event.latest
 
-    render json: @events
+    render json: EventSerializer.new(@events).serializable_hash[:data].map{ |data| data[:attributes] }
   end
 
   # GET /events/1
@@ -15,13 +15,8 @@ class EventsController < ApplicationController
 
   # POST /events
   def create
-    @event = Event.new(event_params)
-
-    if @event.save
-      render json: @event, status: :created, location: @event
-    else
-      render json: @event.errors, status: :unprocessable_entity
-    end
+    @event = Event.create!(event_params) 
+    render json: @event, status: :created, location: @event
   end
 
   # PATCH/PUT /events/1
@@ -46,6 +41,6 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:name, :description, :image_url, :date, :time, :venue)
+      params.permit(:name, :description, :image_url, :date, :time, :venue, :image)
     end
 end

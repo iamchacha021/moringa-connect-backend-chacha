@@ -1,7 +1,4 @@
-class EventSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :image_url, :date, :formatted_time, :venue
-
-  def formatted_time
-    object.time.strftime("%I:%M %p")
-  end
+class EventSerializer
+  include JSONAPI::Serializer
+  attributes :id, :name, :description, :image_url, :date, :time, :venue, :img_url
 end
