@@ -10,7 +10,8 @@ class EventsController < ApplicationController
 
   # GET /events/1
   def show
-    render json: @event
+    event = Event.find_by(id: params[:id])
+    render json: EventSerializer.new(event).serializable_hash[:data][:attributes]
   end
 
   # POST /events
